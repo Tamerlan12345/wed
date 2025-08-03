@@ -45,51 +45,42 @@
         .music-toggle-button { position: fixed; top: 20px; right: 20px; width: 50px; height: 50px; background-color: rgba(201, 171, 129, 0.8); color: white; border-radius: 50%; border: none; cursor: pointer; z-index: 1000; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.3); transition: transform 0.2s ease; }
         .music-toggle-button:hover { transform: scale(1.1); }
 
-        /* --- НОВАЯ СЕКЦИЯ: НАША ИСТОРИЯ (С ФОТО) --- */
-        .story-grid {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 50px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-        .person-card {
-            max-width: 300px;
-        }
-        .person-card img {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--gold-color);
-            margin-bottom: 20px;
-        }
-        .person-card h3 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.8rem;
-            color: white;
-            margin: 0 0 10px 0;
-            font-weight: normal;
-        }
+        /* --- СЕКЦИЯ: НАША ИСТОРИЯ (С ФОТО) --- */
+        .story-grid { display: flex; justify-content: center; align-items: flex-start; gap: 50px; flex-wrap: wrap; margin-top: 40px; }
+        .person-card { max-width: 300px; }
+        .person-card img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 5px solid var(--gold-color); margin-bottom: 20px; }
+        .person-card h3 { font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: white; margin: 0 0 10px 0; font-weight: normal; }
 
-        /* --- ДРУГИЕ СЕКЦИИ --- */
+        /* --- ДЕТАЛИ --- */
         .details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
         .detail-item { background-color: rgba(0, 0, 0, 0.3); padding: 30px; border-radius: 8px; border: 1px solid var(--gold-color); }
         .detail-item h3 { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; color: var(--gold-color); margin-top: 0; }
-        .btn { display: inline-block; margin-top: 20px; padding: 12px 30px; background-color: var(--gold-color); color: #111; text-decoration: none; border-radius: 5px; font-weight: bold; transition: all 0.3s ease; }
-        .btn:hover { background-color: white; transform: scale(1.05); }
-        footer { padding: 40px 20px; text-align: center; }
+        
+        /* --- СТИЛИ ДЛЯ ВСТРОЕННОЙ GOOGLE ФОРМЫ --- */
+        .google-form-container {
+            max-width: 700px; /* Максимальная ширина формы */
+            height: 850px; /* Высота контейнера, можно настроить */
+            margin: 30px auto 0 auto;
+            border-radius: 10px;
+            overflow: hidden; /* Скрывает все, что выходит за рамки */
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        .google-form-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- ПОДВАЛ --- */
+        footer { padding: 40px 20px; text-align: center; border-bottom: none; }
         footer .names { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--gold-color); }
 
         /* --- Адаптивность --- */
         @media (max-width: 768px) {
             h2 { font-size: 3.5rem; }
             .hero h1 { font-size: 4rem; }
-            #countdown div { margin: 0 10px; }
-            #countdown div span { font-size: 2rem; }
-            .music-toggle-button { width: 45px; height: 45px; top: 15px; right: 15px; }
             .person-card img { width: 180px; height: 180px; }
+            .google-form-container { height: 900px; } /* Увеличиваем высоту на мобильных */
         }
     </style>
 </head>
@@ -124,12 +115,12 @@
             <h2>Наша История</h2>
             <div class="story-grid">
                 <div class="person-card">
-                    <img src="https://via.placeholder.com/300/CCCCCC/FFFFFF?text=Фото+Тамерлана" alt="Фото Тамерлана">
+                    <img src="https://drive.google.com/file/d/1eKx7UpFXwYaX5eUqkWVxMNtaFnkSlQVd/view?usp=sharing" alt="Фото Тамерлана">
                     <h3>Тамерлан</h3>
                     <p>Самый счастливый жених, который с нетерпением ждет дня, чтобы назвать свою любимую женой.</p>
                 </div>
                 <div class="person-card">
-                    <img src="https://via.placeholder.com/300/CCCCCC/FFFFFF?text=Фото+Ясмины" alt="Фото Ясмины">
+                    <img src="https://drive.google.com/file/d/1l6EQs1sshjGoKQHx7SCnzft-dxK4pWSN/view?usp=sharing" alt="Фото Ясмины">
                     <h3>Ясмина</h3>
                     <p>Самая прекрасная невеста, которая готовится сказать "Да" мужчине своей мечты.</p>
                 </div>
@@ -158,8 +149,11 @@
 
         <section id="rsvp" class="container">
             <h2>Подтвердите Присутствие</h2>
-            <p>Пожалуйста, подтвердите ваше присутствие до 10 октября 2025 года любым удобным для вас способом. Ваше подтверждение очень важно для нас!</p>
-            <a href="https://wa.me/77001234567?text=Здравствуйте,%20Тамерлан%20и%20Ясмина!%20Мы%20с%20радостью%20придем%20на%20вашу%20свадьбу!" target="_blank" class="btn">Подтвердить через WhatsApp</a>
+            <p>Пожалуйста, заполните небольшую анкету ниже до 10 октября 2025 года. Ваше подтверждение очень важно для нас!</p>
+            
+            <div class="google-form-container">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfr2ntZgWIEa5-ylikA2d6rNallRp0pTCUwkfIM8e2f1lVt1Q/viewform?usp=sharing&ouid=102335824920415303695" loading="lazy">Загрузка…</iframe>
+            </div>
         </section>
     </main>
 
@@ -205,20 +199,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const musicIcon = musicToggle.querySelector('i');
     const audio = document.getElementById('background-music');
 
-    // Попытка автоматического запуска музыки
-    let playPromise = audio.play();
-    if (playPromise !== undefined) {
-        playPromise.then(_ => {
-            // Автозапуск сработал! Меняем иконку на "паузу".
-            musicIcon.classList.remove('fa-play');
-            musicIcon.classList.add('fa-pause');
-        }).catch(error => {
-            // Автозапуск не сработал. Иконка остается "плей".
-            console.log("Autoplay was prevented by the browser.");
-        });
-    }
+    setTimeout(function() {
+        let playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                musicIcon.classList.remove('fa-play');
+                musicIcon.classList.add('fa-pause');
+            }).catch(error => {
+                console.log("Autoplay was prevented by the browser after a 2-second delay.");
+            });
+        }
+    }, 2000);
     
-    // Обработчик клика по кнопке
     musicToggle.addEventListener('click', function() {
         if (audio.paused) {
             audio.play();
