@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Свадьба Тамерлана и Ясмины</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* --- ШРИФТЫ И ГЛОБАЛЬНЫЕ СТИЛИ --- */
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&display=swap');
+
+        :root {
+            --gold-color: #c9ab81;
+            --text-color: #f0f0f0;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1532289735235-a2d6e7f53a41?q=80&w=1974&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+        }
+        
+        /* --- ОБЩИЕ ЭЛЕМЕНТЫ --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: var(--gold-color);
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- СЕКЦИЯ 1: ГЛАВНЫЙ ЭКРАН --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-bottom: none;
+        }
+        
+        .hero h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 6rem;
+            color: white;
+            margin: 0;
+            font-weight: normal;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin: 5px 0;
+        }
+
+        #personalized-greeting {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            padding: 0 10px;
+            min-height: 2.2rem;
+            font-weight: 300;
+        }
+        
+        #personalized-greeting strong {
+            color: var(--gold-color);
+            font-weight: 400;
+        }
+        
+        .hero .date {
+            font-size: 1.4rem;
+            margin-top: 20px;
+            letter-spacing: 2px;
+        }
+
+        /* --- ТАЙМЕР ОБРАТНОГО ОТСЧЕТА --- */
+        #countdown {
+            margin-top: 40px;
+        }
+        
+        #countdown div {
+            display: inline-block;
+            margin: 0 20px;
+            font-size: 1.2rem;
+        }
+
+        #countdown div span {
+            display: block;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold-color);
+        }
+        
+        /* --- КНОПКА УПРАВЛЕНИЯ МУЗЫКОЙ --- */
+        .music-toggle-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(201, 171, 129, 0.8);
+            color: white;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .music-toggle-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- ДРУГИЕ СЕКЦИИ --- */
+        .details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
+        .detail-item { background-color: rgba(0, 0, 0, 0.3); padding: 30px; border-radius: 8px; border: 1px solid var(--gold-color); }
+        .detail-item h3 { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; color: var(--gold-color); margin-top: 0; }
+        .btn { display: inline-block; margin-top: 20px; padding: 12px 30px; background-color: var(--gold-color); color: #111; text-decoration: none; border-radius: 5px; font-weight: bold; transition: all 0.3s ease; }
+        .btn:hover { background-color: white; transform: scale(1.05); }
+        footer { padding: 40px 20px; text-align: center; }
+        footer .names { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--gold-color); }
+
+        /* --- Адаптивность --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 4rem; }
+            h2 { font-size: 3rem; }
+            #countdown div { margin: 0 10px; }
+            #countdown div span { font-size: 2rem; }
+            .music-toggle-button { width: 45px; height: 45px; top: 15px; right: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="background-music" src="music.mp3" loop></audio>
+
+    <button id="music-toggle" class="music-toggle-button">
+        <i class="fas fa-play"></i>
+    </button>
+    
+    <header class="hero">
+        <p>Приглашение на свадьбу</p>
+        <h1>Тамерлан & Ясмина</h1>
+        <div id="personalized-greeting"></div>
+        <div class="date">
+            25 Октября 2025 Года
+        </div>
+        <div id="countdown">
+            <div><span id="days">0</span>Дней</div>
+            <div><span id="hours">0</span>Часов</div>
+            <div><span id="minutes">0</span>Минут</div>
+            <div><span id="seconds">0</span>Секунд</div>
+        </div>
+    </header>
+
+    <main>
+        <section id="invitation" class="container">
+            <h2>Дорогие Гости!</h2>
+            <p>Один день в жизни может стать началом большого счастья. Для нас этот день — наша свадьба! Мы будем безмерно рады, если вы разделите с нами радость этого незабываемого события и станете свидетелями начала нашей семейной истории.</p>
+        </section>
+
+        <section id="details" class="container">
+            <h2>Когда и Где</h2>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <h3>Церемония и Банкет</h3>
+                    <p>
+                        <strong>Дата:</strong> 25 октября 2025<br>
+                        <strong>Сбор гостей:</strong> 17:00<br>
+                        <strong>Место:</strong> Ресторан "Paradise"<br>
+                        <strong>Адрес:</strong> г. Алматы, пр. Аль-Фараби, 142
+                    </p>
+                    <a href="https://yandex.kz/maps/-/CDURm-4O" target="_blank" class="btn">Показать на карте</a>
+                </div>
+                <div class="detail-item">
+                    <h3>Дополнительная информация</h3>
+                    <p>Мы просим вас воздержаться от криков "Горько!" и хотим, чтобы этот вечер был наполнен теплыми словами и искренними улыбками. Ваши подарки мы с радостью примем в конвертах.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="rsvp" class="container">
+            <h2>Подтвердите Присутствие</h2>
+            <p>Пожалуйста, подтвердите ваше присутствие до 10 октября 2025 года любым удобным для вас способом. Ваше подтверждение очень важно для нас!</p>
+            <a href="https://wa.me/77001234567?text=Здравствуйте,%20Тамерлан%20и%20Ясмина!%20Мы%20с%20радостью%20придем%20на%20вашу%20свадьбу!" target="_blank" class="btn">Подтвердить через WhatsApp</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>С нетерпением ждем нашей встречи!</p>
+        <div class="names">Тамерлан и Ясмина</div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // --- СКРИПТ ПЕРСОНАЛЬНОГО ПРИВЕТСТВИЯ (ТЕКСТ ИЗМЕНЕН) ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestName = urlParams.get('name');
+    const greetingElement = document.getElementById('personalized-greeting');
+
+    if (guestName) {
+        // Новый формат приветствия
+        greetingElement.innerHTML = `Приглашаем Вас, <strong>${decodeURIComponent(guestName)}</strong>, на нашу свадьбу!`;
+    } else {
+        greetingElement.textContent = 'Будем рады видеть Вас на нашем празднике!';
+    }
+
+
+    // --- СКРИПТ ТАЙМЕРА ОБРАТНОГО ОТСЧЕТА (ДАТА ИЗМЕНЕНА) ---
+    const weddingDate = new Date("Oct 25, 2025 17:00:00").getTime();
+
+    const countdownFunction = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+
+        if (distance < 0) {
+            clearInterval(countdownFunction);
+            document.getElementById("countdown").innerHTML = "<h3>Это событие уже состоялось!</h3>";
+        }
+    }, 1000);
+    
+    
+    // --- СКРИПТ УПРАВЛЕНИЯ МУЗЫКОЙ (НОВЫЙ) ---
+    const musicToggle = document.getElementById('music-toggle');
+    const musicIcon = musicToggle.querySelector('i');
+    const audio = document.getElementById('background-music');
+    
+    musicToggle.addEventListener('click', function() {
+        if (audio.paused) {
+            audio.play();
+            musicIcon.classList.remove('fa-play');
+            musicIcon.classList.add('fa-pause');
+        } else {
+            audio.pause();
+            musicIcon.classList.remove('fa-pause');
+            musicIcon.classList.add('fa-play');
+        }
+    });
+});
+</script>
+
+</body>
+</html>
